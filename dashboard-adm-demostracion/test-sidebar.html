@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sidebar Toggle</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: #fff;
+            border-right: 1px solid #ddd;
+            transition: width 0.3s;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .sidebar.collapsed {
+            width: 80px;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .sidebar.collapsed .sidebar-header {
+            justify-content: center;
+        }
+
+        .logo-text {
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar.collapsed .logo-text {
+            opacity: 0;
+            width: 0;
+            overflow: hidden;
+        }
+
+        .sidebar-toggle {
+            background: #f0f0f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-toggle:hover {
+            background: #e0e0e0;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .sidebar.collapsed~.main-content {
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-text">AdminPro</span>
+            <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        </div>
+        <div style="padding: 20px;">
+            <p>Menú</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1>Test del Sidebar Toggle</h1>
+        <p>Haz clic en el botón ☰ para colapsar/expandir el sidebar</p>
+        <p id="status">Estado: Expandido</p>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const status = document.getElementById('status');
+
+        sidebarToggle.addEventListener('click', () => {
+            console.log('Click detectado!');
+            sidebar.classList.toggle('collapsed');
+            const isCollapsed = sidebar.classList.contains('collapsed');
+            status.textContent = 'Estado: ' + (isCollapsed ? 'Colapsado' : 'Expandido');
+            console.log('Sidebar colapsado:', isCollapsed);
+        });
+
+        console.log('Script cargado correctamente');
+        console.log('Sidebar:', sidebar);
+        console.log('Toggle button:', sidebarToggle);
+    </script>
+</body>
+
+</html>

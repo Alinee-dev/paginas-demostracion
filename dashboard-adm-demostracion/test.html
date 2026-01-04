@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+
+        .test-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        h1 {
+            color: #667eea;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dashboard Test Page</h1>
+    <div class="test-box">
+        <h2>Testing Chart.js</h2>
+        <p id="chartTest">Loading...</p>
+    </div>
+    <div class="test-box">
+        <h2>Main Dashboard</h2>
+        <p><a href="index.html">Open Dashboard</a></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+        // Test if Chart.js loaded
+        const testEl = document.getElementById('chartTest');
+        if (typeof Chart !== 'undefined') {
+            testEl.innerHTML = '<span class="success">✓ Chart.js loaded successfully!</span>';
+            testEl.innerHTML += '<br>Version: ' + Chart.version;
+        } else {
+            testEl.innerHTML = '<span class="error">✗ Chart.js failed to load</span>';
+        }
+    </script>
+</body>
+
+</html>
