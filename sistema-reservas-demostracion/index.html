@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Sistema moderno de gestión de reservas con interfaz intuitiva y diseño premium para administrar reservaciones de manera eficiente">
+    <title>Sistema de Reservas - Gestión Profesional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="24" height="22" rx="3" stroke="currentColor" stroke-width="2" />
+                            <path d="M4 12H28" stroke="currentColor" stroke-width="2" />
+                            <circle cx="11" cy="4" r="2" fill="currentColor" />
+                            <circle cx="21" cy="4" r="2" fill="currentColor" />
+                            <rect x="10" y="16" width="4" height="4" rx="1" fill="currentColor" />
+                            <rect x="18" y="16" width="4" height="4" rx="1" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <h1>Sistema de Reservas</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">Total Reservas</span>
+                        <span class="stat-value" id="totalReservas">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Activas</span>
+                        <span class="stat-value stat-active" id="reservasActivas">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Completadas</span>
+                        <span class="stat-value stat-completed" id="reservasCompletadas">0</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Nueva Reserva Form -->
+            <section class="reservation-form-section">
+                <div class="section-header">
+                    <h2>Nueva Reserva</h2>
+                    <p class="section-subtitle">Completa los datos para crear una nueva reservación</p>
+                </div>
+
+                <form id="reservationForm" class="reservation-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="clientName">Nombre del Cliente</label>
+                            <input type="text" id="clientName" placeholder="Ej: Juan Pérez" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientEmail">Email</label>
+                            <input type="email" id="clientEmail" placeholder="cliente@ejemplo.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientPhone">Teléfono</label>
+                            <input type="tel" id="clientPhone" placeholder="+54 11 1234-5678" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceType">Tipo de Servicio</label>
+                            <select id="serviceType" required>
+                                <option value="">Seleccionar servicio</option>
+                                <option value="restaurant">Restaurante</option>
+                                <option value="hotel">Hotel</option>
+                                <option value="spa">Spa & Wellness</option>
+                                <option value="salon">Salón de Eventos</option>
+                                <option value="tour">Tour Guiado</option>
+                                <option value="consulta">Consulta Profesional</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reservationDate">Fecha</label>
+                            <input type="date" id="reservationDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reservationTime">Hora</label>
+                            <input type="time" id="reservationTime" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numberOfPeople">Número de Personas</label>
+                            <input type="number" id="numberOfPeople" min="1" max="50" placeholder="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duration">Duración (horas)</label>
+                            <input type="number" id="duration" min="0.5" max="24" step="0.5" placeholder="2" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="specialRequests">Solicitudes Especiales</label>
+                        <textarea id="specialRequests" rows="3"
+                            placeholder="Alergias, preferencias, necesidades especiales..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        Crear Reserva
+                    </button>
+                </form>
+            </section>
+
+            <!-- Filtros y Búsqueda -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="search-box">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2" />
+                            <path d="M14 14L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Buscar por nombre, email o servicio...">
+                    </div>
+
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="pending">Pendientes</button>
+                        <button class="filter-btn" data-filter="confirmed">Confirmadas</button>
+                        <button class="filter-btn" data-filter="completed">Completadas</button>
+                        <button class="filter-btn" data-filter="cancelled">Canceladas</button>
+                    </div>
+
+                    <select id="sortSelect" class="sort-select">
+                        <option value="date-desc">Más recientes</option>
+                        <option value="date-asc">Más antiguas</option>
+                        <option value="name-asc">Nombre A-Z</option>
+                        <option value="name-desc">Nombre Z-A</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Lista de Reservas -->
+            <section class="reservations-section">
+                <div class="section-header">
+                    <h2>Reservas Registradas</h2>
+                    <p class="section-subtitle" id="reservationCount">No hay reservas registradas</p>
+                </div>
+
+                <div id="reservationsList" class="reservations-list">
+                    <!-- Las reservas se agregarán dinámicamente aquí -->
+                    <div class="empty-state">
+                        <div class="empty-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="12" width="48" height="44" rx="6" stroke="currentColor"
+                                    stroke-width="3" />
+                                <path d="M8 24H56" stroke="currentColor" stroke-width="3" />
+                                <circle cx="22" cy="8" r="4" fill="currentColor" />
+                                <circle cx="42" cy="8" r="4" fill="currentColor" />
+                                <rect x="20" y="32" width="8" height="8" rx="2" fill="currentColor" />
+                                <rect x="36" y="32" width="8" height="8" rx="2" fill="currentColor" />
+                            </svg>
+                        </div>
+                        <h3>No hay reservas aún</h3>
+                        <p>Crea tu primera reserva usando el formulario de arriba</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast">
+            <div class="toast-icon"></div>
+            <span class="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
